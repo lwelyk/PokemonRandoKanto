@@ -1,0 +1,50 @@
+raw `
+ViridianCavern_Frlg_2F_MapScripts::
+	.byte 0
+
+ViridianCavern2F_EventScript_Doug::
+	trainerbattle_single TRAINER_BUG_CATCHER_DOUG, ViridianCavern_Text_DougIntro, ViridianCavern_Text_DougDefeat
+	msgbox ViridianCavern_Text_DougPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+ViridianCavern2F_EventScript_TrainerTips3::
+	msgbox ViridianCavern_Text_ContactOakViaPCToRatePokedex, MSGBOX_SIGN
+	end
+
+
+ViridianCavern2F_EventScript_Charlie::
+	trainerbattle_single TRAINER_BUG_CATCHER_CHARLIE, ViridianCavern_Text_CharlieIntro, ViridianCavern_Text_CharlieDefeat
+	msgbox ViridianCavern_Text_CharliePostBattle, MSGBOX_AUTOCLOSE
+	end
+
+ViridianCavern_Text_CharlieIntro::
+	.string "Did you know that POKéMON evolve?$"
+
+ViridianCavern_Text_CharlieDefeat::
+	.string "Oh!\n"
+	.string "I lost!$"
+
+ViridianCavern_Text_CharliePostBattle::
+	.string "ROCK POKéMON are sturdy.\n"
+	.string "They're a lot of fun!$"
+
+ViridianCavern_Text_DougIntro::
+	.string "Yo!\n"
+	.string "You can't jam out if you're a\l"
+	.string "POKéMON TRAINER!$"
+
+ViridianCavern_Text_DougDefeat::
+	.string "Huh?\n"
+	.string "I ran out of POKéMON!$"
+
+ViridianCavern_Text_DougPostBattle::
+	.string "That totally stinks! I'm going to\n"
+	.string "catch some stronger ones!$"
+
+ViridianCavern_Text_CantCatchOwnedMons::
+	.string "TRAINER TIPS\p"
+	.string "You can't catch a POKéMON that\n"
+	.string "belongs to someone else.\p"
+	.string "Throw POKé BALLS only at wild\n"
+	.string "POKéMON to catch them!$"
+`

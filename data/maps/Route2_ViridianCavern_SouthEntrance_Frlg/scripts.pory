@@ -1,0 +1,20 @@
+mapscripts Route2_ViridianCavern_SouthEntrance_Frlg_MapScripts {
+	
+}
+
+script Route2_ViridianCavern_SouthEntrance_CaveIsMaze {
+    lock
+    faceplayer
+    msgbox("Are you going to VIRIDIAN CAVERN?\nIt's a natural maze in there. Be careful you don't get lost.")
+    release
+    end
+}
+
+
+script Route2_ViridianCavern_SouthEntrance_WickedBite {
+    lock
+    faceplayer
+    msgbox("ZUBAT may be small, but don't underestimate its wicked bite. Have you caught one already?")
+    release
+    end
+}

@@ -1,0 +1,140 @@
+{
+    "STARTER_GRASS": {
+        "AppearanceWeight": 100,
+        "Attributes": [
+            {
+                "Type": "Grass",
+                "Scoring": 100
+            },
+            {
+                "EvolutionStages": 3,
+                "Scoring": 100
+            },
+            {
+                "EvolvesBy": "LevelUp",
+                "Scoring": 100
+            },
+            {
+                "Tag": "Starter",
+                "Scoring": 100
+            }
+        ]
+    },
+    "STARTER_FIRE": {
+        "AppearanceWeight": 100,
+        "Attributes": [
+            {
+                "Type": "Fire",
+                "Scoring": 100
+            },
+            {
+                "EvolutionStages": 3,
+                "Scoring": 100
+            },
+            {
+                "EvolvesBy": "LevelUp",
+                "Scoring": 100
+            },
+            {
+                "Tag": "Starter",
+                "Scoring": 100
+            }
+        ]
+    },
+    "STARTER_WATER": {
+        "AppearanceWeight": 100,
+        "Attributes": [
+            {
+                "Type": "Water",
+                "Scoring": 100
+            },
+            {
+                "EvolutionStages": 3,
+                "Scoring": 100
+            },
+            {
+                "EvolvesBy": "LevelUp",
+                "Scoring": 100
+            },
+            {
+                "Tag": "Starter",
+                "Scoring": 100
+            }
+        ]
+    },
+    "EARLY_BUG": {
+        "AppearanceWeight": 100,
+        "Attributes": [
+            {
+                "Type": "Bug",
+                "Scoring": 100
+            },
+            {
+                "EvolutionStages": 3,
+                "Scoring": 70
+            },
+            {
+                "EvolvesBy": "LevelUp",
+                "Scoring": 80
+            },
+            {
+                "MaxEvolutionLevel": 20,
+                "Scoring": 90
+            }
+        ]
+    },
+    "REGIONAL_BIRD": {
+        "AppearanceWeight": 100,
+        "Attributes": [
+            {
+                "Type": "Flying",
+                "Scoring": 100
+            },
+            {
+                "EvolutionStages": 3,
+                "Scoring": 30
+            },
+            {
+                "EvolutionStages": 2,
+                "Scoring": 30
+            },
+            {
+                "EvolvesBy": "LevelUp",
+                "Scoring": 80
+            },
+            {
+                "MaxEvolutionLevel": 20,
+                "Scoring": 90
+            },
+            {
+                "BodyType": "Bird",
+                "Scoring": 100
+            }
+        ]
+    },
+    "REGIONAL_RODENT": {
+        "AppearanceWeight": 80,
+        "Attributes": [
+            {
+                "Type": "Normal",
+                "Scoring": 70
+            },
+            {
+                "EvolutionStages": 2,
+                "Scoring": 80
+            },
+            {
+                "EvolvesBy": "LevelUp",
+                "Scoring": 80
+            },
+            {
+                "MaxEvolutionLevel": 30,
+                "Scoring": 90
+            },
+            {
+                "BodyType": "Rodent",
+                "Scoring": 100
+            }
+        ]
+    },
+}
