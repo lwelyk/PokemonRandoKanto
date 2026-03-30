@@ -2,6 +2,10 @@ import os
 import json
 
 map_dir = 'data/maps'
+party_files = [
+    'src/data/trainers.party',
+    'src/data/trainers_frlg.party'
+    ]
 
 skip_maps = [
     'BattleFrontier_BattleArenaBattleRoom',
@@ -17,7 +21,8 @@ skip_maps = [
     'BattleFrontier_BattlePyramidTop',
     'SlateportCity_BattleTentBattleRoom'
 ]
-
+trainers = {}
+trainer_text = []
 def check_trainer_line(line):
     if "trainerbattle" in line and "dofacilitytrainerbattle" not in line and line.strip()[-1:] != ":":
         return True
@@ -60,9 +65,6 @@ def parse_trainer_line(line):
   
 
 def extract_trainerscript_data():
-    trainers = {}
-    trainer_text = []
-
     for dirpath, dirnames, filenames in os.walk(map_dir):
         if dirpath.split('/')[-1] in skip_maps:
             continue
@@ -122,10 +124,84 @@ def extract_trainerscript_data():
                 except Exception as e:
                     print(f"Error reading {filepath}: {e}")
                 
-    with open('tools/randomizer_tools/trainers.json', 'w') as f:
-        json.dump(trainers , f, indent=4)
 
-    with open('tools/randomizer_tools/trainer_text.json', 'w') as f:
-        json.dump(trainer_text , f, indent=4)
+
+def extract_trainer_party_data():
+    for file in party_files:
+        try:
+            with open(file, "r", encoding="utf-8", errors="ignore") as f:
+                in_trainer = False
+                in_pokemon = False
+                in_comment_block = False
+                current_trainer = {}
+                current_pokemon = {}
+                for lineno, line in enumerate(f, 1):
+                    if '/*' in line and '*/' not in line:
+                        in_comment_block = True
+                        continue
+                    elif '*/' in line and in_comment_block and '/*' not in line:
+                        in_comment_block = False
+                        continue
+                    elif in_comment_block:
+                        continue
+                    elif '/*' in line and '*/' in line:
+                        real_line = line.split('/*')[0] + line.split('*/')[1]
+                        if len(real_line.strip()) == 0:
+                            continue
+                        else:
+                            line = real_line
+                    elif line.strip()[:2] == "==":
+                        if in_trainer == True:
+                            if current_trainer['constant'] not in trainers:
+                                trainers[current_trainer['constant']] = {}
+                            trainers[current_trainer['constant']]['party'] = current_trainer['party']
+                            trainers[current_trainer['constant']].update(current_trainer)
+                            current_trainer = {}
+                            current_pokemon = {}
+                            in_pokemon = False
+                        current_trainer['constant'] = line.strip().replace("=", "").strip()
+                        current_trainer['party'] = []
+                        in_trainer = True
+                    elif in_trainer == True and in_pokemon == False and ':' in line:
+                        key = line.split(":")[0].strip()
+                        value = line.split(":")[1].strip()
+                        current_trainer[key] = value
+                    elif len(line.strip()) == 0 and in_trainer == True and in_pokemon == True:
+                        current_trainer['party'].append(current_pokemon)
+                        current_pokemon = {}
+                    elif len(line.strip()) == 0 and in_trainer == True and in_pokemon == False:
+                        in_pokemon = True
+                    elif len(line.strip()) > 0 and in_trainer == True and in_pokemon == True:
+                        if ':' in line:
+                            key = line.split(":")[0].strip()
+                            value = line.split(":")[1].strip()
+                            if '/' in value:
+                                new_value = {}
+                                vals = value.split(' / ')
+                                for val in vals:
+                                    new_value[val.split(' ')[1].strip()] = val.split(' ')[0].strip()
+                                value = new_value
+                            current_pokemon[key] = value
+                        elif line.strip()[0] == '-':
+                            if 'moves' not in current_pokemon:
+                                current_pokemon['moves'] = []
+                            current_pokemon['moves'].append(line.strip().split('- ')[1])
+                        else:
+                            current_pokemon['name'] = line.strip()
+                    else:
+                        print(f"{lineno}: {line.strip()}")
+
+        except Exception as e:
+            print(f"Error reading {file}: {e}")
+
 
 extract_trainerscript_data()
+
+extract_trainer_party_data()
+
+with open('tools/randomizer_tools/trainers.json', 'w') as f:
+        json.dump(trainers , f, indent=4)
+
+with open('tools/randomizer_tools/trainer_text.json', 'w') as f:
+        json.dump(trainer_text , f, indent=4)
+
